@@ -1,6 +1,8 @@
 package org.skypro.skyshop;
 
 import basket.ProductBasket;
+import org.skypro.skyshop.product.DiscountedProduct;
+import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
 
@@ -12,25 +14,29 @@ public class App {
         SimpleProduct orange = new SimpleProduct("Апельсин", 30);
         SimpleProduct banana = new SimpleProduct("Банан", 35);
         SimpleProduct peach = new SimpleProduct("Персик", 30);
-        SimpleProduct lemon = new SimpleProduct("Лимон", 20);
-        SimpleProduct pear = new SimpleProduct("Груша", 25);
+        DiscountedProduct lemon = new DiscountedProduct("Лимон", 20, 20);
+        FixPriceProduct pear = new FixPriceProduct("Груша", 25);
 
         ProductBasket firstBasket = new ProductBasket();
         ProductBasket secondBasket = new ProductBasket();
-        ProductBasket thirdBasket = new ProductBasket();
+
 
         firstBasket.addProduct(apple);
-        firstBasket.addProduct(orange);
-        firstBasket.addProduct(banana);
         firstBasket.addProduct(peach);
         firstBasket.addProduct(pear);
+        firstBasket.addProduct(lemon);
 
-        System.out.println(firstBasket.countTotal());
 
         firstBasket.printBasket();
+        System.out.println();
+        System.out.println();
+
+        System.out.println(firstBasket.countTotal());
+        System.out.println();
+        System.out.println();
 
 
-        System.out.println(firstBasket.checkProduct(apple.getName()));
+        System.out.println("check product: " + firstBasket.checkProduct(apple.getName()));
 
 
         System.out.println(firstBasket.checkProduct(lemon.getName()));
@@ -54,15 +60,3 @@ public class App {
 
     }
 }
-
-
-
-
-// Печать содержимого корзины с несколькими товарами.
-// Получение стоимости корзины с несколькими товарами.
-// Поиск товара, который есть в корзине.
-// Поиск товара, которого нет в корзине.
-//  Очистка корзины.
-//  Печать содержимого пустой корзины.
-// Получение стоимости пустой корзины.
-// Поиск товара по имени в пустой корзине.
