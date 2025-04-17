@@ -3,8 +3,10 @@ package org.skypro.skyshop;
 import basket.ProductBasket;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
-import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
+
+import javax.naming.directory.SearchControls;
+import java.util.Arrays;
 
 public class App {
 
@@ -16,47 +18,27 @@ public class App {
         SimpleProduct peach = new SimpleProduct("Персик", 30);
         DiscountedProduct lemon = new DiscountedProduct("Лимон", 20, 20);
         FixPriceProduct pear = new FixPriceProduct("Груша", 25);
-
+        Article aboutApple = new Article(" Вкусное яблоко ", " Яблоко ");
         ProductBasket firstBasket = new ProductBasket();
         ProductBasket secondBasket = new ProductBasket();
 
 
-        firstBasket.addProduct(apple);
-        firstBasket.addProduct(peach);
-        firstBasket.addProduct(pear);
-        firstBasket.addProduct(lemon);
+        //-------------------
 
 
-        firstBasket.printBasket();
         System.out.println();
-        System.out.println();
+        System.out.println("===-------");
 
-        System.out.println(firstBasket.countTotal());
-        System.out.println();
-        System.out.println();
+        Article article = new Article("content1", "name1");
+        System.out.println(article.getStringRepresentation());
 
+        SearchEngine engine = new SearchEngine(10);
+        engine.add(aboutApple);
+        engine.add(lemon);
+        engine.add(apple);
 
-        System.out.println("check product: " + firstBasket.checkProduct(apple.getName()));
-
-
-        System.out.println(firstBasket.checkProduct(lemon.getName()));
-
-        firstBasket.addProduct(lemon);
-
-
-        secondBasket.addProduct(apple);
-        secondBasket.addProduct(apple);
-        secondBasket.addProduct(apple);
-
-        secondBasket.printBasket();
-
-        secondBasket.cleanBasket();
-
-        secondBasket.printBasket();
-
-        secondBasket.countTotal();
-
-        System.out.println(secondBasket.checkProduct(apple.getName()));
+        Searchable[] results = engine.search("Яблоко");
+        System.out.println(Arrays.toString(results));
 
     }
 }
