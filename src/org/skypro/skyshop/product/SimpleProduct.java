@@ -4,7 +4,13 @@ public class SimpleProduct extends Product {
     private int price;
 
     public SimpleProduct(String name, int price) {
+
         super(name);
+
+        if (price < 1) {
+            throw new IllegalArgumentException("Цена недействительна");
+        }
+
         this.price = price;
     }
 

@@ -5,6 +5,7 @@ import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ProductBasket {
@@ -12,7 +13,10 @@ public class ProductBasket {
     private Product[] products = new Product[5];
 
 
+
+
     public boolean checkProduct(String wantedName) {
+
         for (int i = 0; i < products.length; i++) {
             if (products[i] == null) {
                 return false;
