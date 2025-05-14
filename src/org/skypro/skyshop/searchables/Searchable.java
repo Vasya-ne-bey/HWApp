@@ -1,4 +1,4 @@
-package org.skypro.skyshop;
+package org.skypro.skyshop.searchables;
 
 public interface Searchable {
     default String getStringRepresentation() {

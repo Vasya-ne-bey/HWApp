@@ -1,8 +1,12 @@
-package org.skypro.skyshop;
+package org.skypro.skyshop.searchengine;
 
-import java.util.Arrays;
+import org.skypro.skyshop.exceptions.BestResultNotFound;
+import org.skypro.skyshop.searchables.Searchable;
 
 public class SearchEngine {
+
+
+    // todo ap
     private Searchable[] searchables;
 
 
@@ -77,6 +81,8 @@ public class SearchEngine {
         return results;
     }
 
+
+    // todo ap
     public void add(Searchable searchable) {
         for (int i = 0; i < searchables.length; i++) {
             if (searchables[i] == null) {

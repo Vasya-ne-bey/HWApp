@@ -1,4 +1,4 @@
-package org.skypro.skyshop.product;
+package org.skypro.skyshop.searchables.product;
 
 public class DiscountedProduct extends Product {
 
