@@ -18,8 +18,6 @@ public abstract class Product implements Searchable {
 
         this.name = name;
 
-        System.out.println("Cоздан продукт");
-
    }
 
     public abstract int getPrice();

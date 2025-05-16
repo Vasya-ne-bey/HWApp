@@ -3,15 +3,16 @@ package org.skypro.skyshop.searchengine;
 import org.skypro.skyshop.exceptions.BestResultNotFound;
 import org.skypro.skyshop.searchables.Searchable;
 
+import java.util.ArrayList;
+
 public class SearchEngine {
 
 
-    // todo ap
-    private Searchable[] searchables;
+    private ArrayList<Searchable> searchables;
 
 
-    public SearchEngine(int size) {
-        searchables = new Searchable[size];
+    public SearchEngine() {
+        searchables = new ArrayList<>();
     }
 
 
@@ -21,18 +22,18 @@ public class SearchEngine {
         int mostWords = 0;
 
 
-        for (int i = 0; i < searchables.length; i++) {          // [product1, null, product2, article2, ...]
+        for (int i = 0; i < searchables.size(); i++) {          // [product1, product2, article2, ...]
 
-            Searchable searchable = searchables[i];
-
-            if (searchable == null) {
-                continue;
-            }
+            Searchable searchable = searchables.get(i);
 
             String str = searchable.getSearchTerm();
 
+
+
+            // считаем сколько раз повторяется слово, и если чаще чем для другого Searchable, то запоминаем этот Searchable
+
             int amount = 0;
-            int newStartIndex = 0;          //  "ld hello jadk jask hello jalks jlas hello jklsj alkjlka dsjlkf sal"
+            int newStartIndex;          //  "ld hello jadk jask hello jalks jlas hello jklsj alkjlka dsjlkf sal"
 
             int substringIndex = str.indexOf(searchableWord);
 
@@ -57,38 +58,25 @@ public class SearchEngine {
     }
 
 
-    public Searchable[] search(String searchTerm) {            // apple
+    public ArrayList<Searchable> search(String searchTerm) {
 
-        Searchable[] results = new Searchable[5];
-        int j = 0;
+        ArrayList<Searchable> resultArrayWithSearchables = new ArrayList<>();
 
-        for (int i = 0; i < searchables.length; i++) {
+        for (int i = 0; i < searchables.size(); i++) {
 
-            if (searchables[i] == null) {
-                continue;
-            }
-
-            String searchableInfo = searchables[i].getSearchTerm();
-            if (searchableInfo.contains(searchTerm)) {
-                results[j] = searchables[i];
-                j++;
-                if (j == 5) {
-                    break;
-                }
+            String articleContents = searchables.get(i).getSearchTerm();
+            if (articleContents.contains(searchTerm)) {
+                resultArrayWithSearchables.add(searchables.get(i));
             }
         }
 
-        return results;
+        return resultArrayWithSearchables;
     }
 
 
-    // todo ap
     public void add(Searchable searchable) {
-        for (int i = 0; i < searchables.length; i++) {
-            if (searchables[i] == null) {
-                searchables[i] = searchable;
-                break;
-            }
-        }
+
+        searchables.add(searchable);
+
     }
 }
