@@ -65,11 +65,9 @@ public class App {
         try {
 
             SimpleProduct apple = new SimpleProduct("Яблоко", 20);
-            SimpleProduct orange = new SimpleProduct("Апельсин", 30);
-            SimpleProduct banana = new SimpleProduct("Банан", 35);
-            SimpleProduct peach = new SimpleProduct("Персик", 30);
+
             DiscountedProduct lemon = new DiscountedProduct("Лимон", 20, 20);
-            FixPriceProduct pear = new FixPriceProduct("Груша", 25);
+
 
 
             Article aboutApple = new Article(" Вкусное яблоко  ", " Яблоко ");

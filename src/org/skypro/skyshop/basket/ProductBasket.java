@@ -20,11 +20,10 @@ public class ProductBasket {
             return deletedProducts;
         }
 
-        Iterator<Product> iterator = products.iterator();           //   список: [банан, яблоко, молоко, ...
+        Iterator<Product> iterator = products.iterator();
 
-        while (iterator.hasNext()) { // пока на ковеере что-то есть
-            // если у продукта из списка то название, которое мы хотим удалить, то мы его удаляем (следующие 5 строк)
-            Product productFromList = iterator.next();  // итератор (кассир) бберёт банан из ссписка, и помещает в переменную продукт
+        while (iterator.hasNext()) {
+            Product productFromList = iterator.next();
             if (productFromList.getName().equals(name)) {
                 iterator.remove();
                 deletedProducts.add(productFromList);
