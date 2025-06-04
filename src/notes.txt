@@ -1,0 +1,9 @@
+
+
+
+KEY         VALUE
+
+"banana"    [banana1, banana2, banana3, ...]
+"apple"     [apple1, apple2, apple3]
+"bread"     [bread1, bread2, bread3, bread4]
+            milk1
