@@ -13,7 +13,7 @@ public final class Article implements Searchable {
 
     @Override
     public String toString() {
-        return articleName + "\n" + articleContent;
+        return articleName + " " + articleContent;
 
     }
 
@@ -27,6 +27,8 @@ public final class Article implements Searchable {
     public String getContentType() {
         return "ARTICLE";
     }
+
+    // todo qp equals and hashcode
 }
 
 

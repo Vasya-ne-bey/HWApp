@@ -4,6 +4,9 @@ import org.skypro.skyshop.exceptions.BestResultNotFound;
 import org.skypro.skyshop.searchables.Searchable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SearchEngine {
 
@@ -58,19 +61,21 @@ public class SearchEngine {
     }
 
 
-    public ArrayList<Searchable> search(String searchTerm) {
+    public Map<String, Searchable> search(String searchTerm) {
 
-        ArrayList<Searchable> resultArrayWithSearchables = new ArrayList<>();
+        Map<String, Searchable> resultMapWithSearchables = new TreeMap<>();
 
         for (int i = 0; i < searchables.size(); i++) {
 
-            String articleContents = searchables.get(i).getSearchTerm();
+            Searchable searchable = searchables.get(i);
+
+            String articleContents = searchable.getSearchTerm();
             if (articleContents.contains(searchTerm)) {
-                resultArrayWithSearchables.add(searchables.get(i));
+                resultMapWithSearchables.put(searchable.getStringRepresentation(), searchable);
             }
         }
 
-        return resultArrayWithSearchables;
+        return resultMapWithSearchables;
     }
 
 
