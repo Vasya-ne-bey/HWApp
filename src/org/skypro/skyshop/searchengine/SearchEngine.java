@@ -2,20 +2,19 @@ package org.skypro.skyshop.searchengine;
 
 import org.skypro.skyshop.exceptions.BestResultNotFound;
 import org.skypro.skyshop.searchables.Searchable;
+import org.skypro.skyshop.searchables.article.Article;
+import org.skypro.skyshop.searchables.product.Product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class SearchEngine {
 
 
-    private ArrayList<Searchable> searchables;
+    private Set<Searchable> searchables;
 
 
     public SearchEngine() {
-        searchables = new ArrayList<>();
+        searchables = new HashSet<>();
     }
 
 
@@ -25,12 +24,10 @@ public class SearchEngine {
         int mostWords = 0;
 
 
-        for (int i = 0; i < searchables.size(); i++) {          // [product1, product2, article2, ...]
-
-            Searchable searchable = searchables.get(i);
+        for (Searchable searchable : searchables) {          // [product1, product2, article2, ...]
+            // с Set нельзя использовать for, только for each
 
             String str = searchable.getSearchTerm();
-
 
 
             // считаем сколько раз повторяется слово, и если чаще чем для другого Searchable, то запоминаем этот Searchable
@@ -61,21 +58,53 @@ public class SearchEngine {
     }
 
 
-    public Map<String, Searchable> search(String searchTerm) {
+    public Set<Searchable> search(String searchTerm) {
 
-        Map<String, Searchable> resultMapWithSearchables = new TreeMap<>();
 
-        for (int i = 0; i < searchables.size(); i++) {
+        Comparator<Searchable> searchableComparator = new Comparator<>() {
 
-            Searchable searchable = searchables.get(i);
+            public int compare(Searchable s1, Searchable s2) {
+
+                String s1Name;
+                String s2Name;
+
+                if (s1 instanceof Product) {
+                    s1Name = ((Product)s1).getName();          //    short number = (short)72389732892;
+                } else {
+                    s1Name = ((Article)s1).getArticleName();
+                }
+
+                if (s2 instanceof Product) {
+                    s2Name = ((Product)s2).getName();
+                } else {
+                    s2Name = ((Article)s2).getArticleName();
+                }
+
+                if (s1Name.length() > s2Name.length()) {
+                    return -1;
+                }
+                else if (s1Name.length() < s2Name.length()) {
+                    return 1;
+                }
+                else {
+                   int compareResult = s1Name.compareTo(s2Name);
+                    return compareResult;
+                }
+            }
+        };
+
+
+        Set<Searchable> resultSetWithSearchables = new TreeSet<>(searchableComparator);
+
+        for (Searchable searchable : searchables) {
 
             String articleContents = searchable.getSearchTerm();
             if (articleContents.contains(searchTerm)) {
-                resultMapWithSearchables.put(searchable.getStringRepresentation(), searchable);
+                resultSetWithSearchables.add(searchable);
             }
         }
 
-        return resultMapWithSearchables;
+        return resultSetWithSearchables;
     }
 
 
