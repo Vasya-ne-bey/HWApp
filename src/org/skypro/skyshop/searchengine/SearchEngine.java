@@ -58,19 +58,25 @@ public class SearchEngine {
     }
 
 
-    public Set<Searchable> search(String searchTerm) {
+    public Set<Article> search(String searchTerm) {
 
 
-        ArticleComparator<Searchable> searchableArticleComparator = new ArticleComparator<>();
+        ArticleComparator<Article> searchableArticleComparator = new ArticleComparator<>();
 
 
-        Set<Searchable> resultSetWithSearchables = new TreeSet<>(searchableArticleComparator);
+        Set<Article> resultSetWithSearchables = new TreeSet<>(searchableArticleComparator);
 
         for (Searchable searchable : searchables) {
 
-            String articleContents = searchable.getSearchTerm();
+            if (searchable instanceof Product) {
+                continue;
+            }
+
+            Article article = (Article)searchable;
+
+            String articleContents = article.getSearchTerm();
             if (articleContents.contains(searchTerm)) {
-                resultSetWithSearchables.add(searchable);
+                resultSetWithSearchables.add(article);
             }
         }
 

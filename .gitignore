@@ -4,7 +4,6 @@ out/
 !**/src/test/**/out/
 .idea/
 HW15.iml
-.gitignore
 
 
 ### Eclipse ###

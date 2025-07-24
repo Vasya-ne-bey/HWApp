@@ -29,17 +29,17 @@ public class App {
         engine.add(pineapple);
 
 
-       Set<Searchable> set1 = engine.search("яблоко");
+       Set<Article> set1 = engine.search("яблоко");
         System.out.println(set1);
         System.out.println();
         System.out.println();
 
-        Set<Searchable> set2 = engine.search("ананас");
+        Set<Article> set2 = engine.search("ананас");
         System.out.println(set2);
         System.out.println();
         System.out.println();
 
-        Set<Searchable> set3 = engine.search("л");
+        Set<Article> set3 = engine.search("л");
         System.out.println(set3);
 
 
