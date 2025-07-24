@@ -25,7 +25,7 @@ public class SearchEngine {
 
 
         for (Searchable searchable : searchables) {          // [product1, product2, article2, ...]
-            // с Set нельзя использовать for, только for each
+
 
             String str = searchable.getSearchTerm();
 
@@ -61,40 +61,10 @@ public class SearchEngine {
     public Set<Searchable> search(String searchTerm) {
 
 
-        Comparator<Searchable> searchableComparator = new Comparator<>() {
-
-            public int compare(Searchable s1, Searchable s2) {
-
-                String s1Name;
-                String s2Name;
-
-                if (s1 instanceof Product) {
-                    s1Name = ((Product)s1).getName();          //    short number = (short)72389732892;
-                } else {
-                    s1Name = ((Article)s1).getArticleName();
-                }
-
-                if (s2 instanceof Product) {
-                    s2Name = ((Product)s2).getName();
-                } else {
-                    s2Name = ((Article)s2).getArticleName();
-                }
-
-                if (s1Name.length() > s2Name.length()) {
-                    return -1;
-                }
-                else if (s1Name.length() < s2Name.length()) {
-                    return 1;
-                }
-                else {
-                   int compareResult = s1Name.compareTo(s2Name);
-                    return compareResult;
-                }
-            }
-        };
+        ArticleComparator<Searchable> searchableArticleComparator = new ArticleComparator<>();
 
 
-        Set<Searchable> resultSetWithSearchables = new TreeSet<>(searchableComparator);
+        Set<Searchable> resultSetWithSearchables = new TreeSet<>(searchableArticleComparator);
 
         for (Searchable searchable : searchables) {
 
