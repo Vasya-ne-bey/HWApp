@@ -61,7 +61,7 @@ public class SearchEngine {
     public Set<Article> search(String searchTerm) {
 
 
-        ArticleComparator<Article> searchableArticleComparator = new ArticleComparator<>();
+        ArticleComparator searchableArticleComparator = new ArticleComparator();
 
 
         Set<Article> resultSetWithSearchables = new TreeSet<>(searchableArticleComparator);

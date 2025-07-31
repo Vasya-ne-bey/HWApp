@@ -6,13 +6,13 @@ import org.skypro.skyshop.searchables.product.Product;
 
 import java.util.Comparator;
 
-public class ArticleComparator<T> implements Comparator<T> {
+public class ArticleComparator implements Comparator<Article> {
 
     @Override
-    public int compare(T article1, T article2) {
+    public int compare(Article article1, Article article2) {
 
-        String article1Name = ((Article)article1).getArticleName();
-        String article2Name = ((Article)article2).getArticleName();
+        String article1Name = article1.getArticleName();
+        String article2Name = article2.getArticleName();
 
 
         if (article1Name.length() > article2Name.length()) {
