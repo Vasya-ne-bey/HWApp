@@ -45,56 +45,38 @@ public class ProductBasket {
 
     public int countTotalSum() {
 
+       Collection<List<Product>> products =  productsMap.values();
 
+         int pricesSum = products.stream()
+                                    .flatMap(list -> list.stream())
+                                    .mapToInt(apple -> apple.getPrice())
+                                    .sum();
 
-        System.out.println("COUNT TOTAL SUM START");
-
-        int sum = 0;
-
-        Set<String> keys = productsMap.keySet();
-
-        for (String productName : keys) {     // для каждой строки в списке keys
-            List<Product> productList = productsMap.get(productName);       // это не get на productName, это get на List
-
-            for (int i = 0; i < productList.size(); i++) {
-
-                Product product = productList.get(i);
-
-                int price = product.getPrice();
-                sum += price;   // sum = sum + price;
-            }
-        }
-
-
-        return sum;
+         return pricesSum;
 
     }
 
     public void printBasket() {
-
-        System.out.println("PRINT BASKET START");
-        System.out.println(productsMap);
-
-        int countSpecial = 0;
+        Collection<List<Product>> products =  productsMap.values();
 
 
-        Set<String> keys = productsMap.keySet();
+        int countSpecial = products.stream()
+                                    .flatMap(list -> list.stream())
+                                    .map(apple -> {
+                                        System.out.println(apple);
+                                        return apple;
+                                    })
+                                    .filter(apple -> apple.isSpecial())
+                                    .toList()
+                                    .size();
 
-        for (String productName : keys) {     // для каждой строки в списке keys
-            List<Product> productList = productsMap.get(productName);       // это не get на productName, это get на List
+        System.out.println("Итого: " + countTotalSum());
+        System.out.println("Специальных товаров: " + countSpecial);
 
-            for (int i = 0; i < productList.size(); i++) {
-                Product product = productList.get(i);
-                System.out.println(product);
 
-                if (product.isSpecial()) {
-                    countSpecial++;
-                }
-            }
 
-            System.out.println("Итого: " + countTotalSum());
-            System.out.println("Специальных товаров: " + countSpecial);
-        }
+
+
     }
 
 

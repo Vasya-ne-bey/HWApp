@@ -6,6 +6,7 @@ import org.skypro.skyshop.searchables.article.Article;
 import org.skypro.skyshop.searchables.product.Product;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SearchEngine {
 
@@ -64,24 +65,17 @@ public class SearchEngine {
         ArticleComparator searchableArticleComparator = new ArticleComparator();
 
 
-        Set<Article> resultSetWithSearchables = new TreeSet<>(searchableArticleComparator);
 
-        for (Searchable searchable : searchables) {
+        TreeSet<Article> articlesWithSearchTerm = searchables.stream()
+                    .filter((searchable) -> searchable instanceof Article)
+                    .filter(article -> article.getSearchTerm().contains(searchTerm))
+                    .map(searchable -> (Article)searchable)
+                    .collect(Collectors.toCollection(() -> new TreeSet<>(searchableArticleComparator)));
 
-            if (searchable instanceof Product) {
-                continue;
-            }
+        return articlesWithSearchTerm;
 
-            Article article = (Article)searchable;
 
-            String articleContents = article.getSearchTerm();
-            if (articleContents.contains(searchTerm)) {
-                resultSetWithSearchables.add(article);
-            }
-        }
-
-        return resultSetWithSearchables;
-    }
+   }
 
 
     public void add(Searchable searchable) {
