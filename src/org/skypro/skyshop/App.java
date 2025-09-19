@@ -14,13 +14,9 @@ import java.util.Set;
 
 public class App {
 
-
-
     public static void main(String[] args) {
 
-
         basketDeleteDemo();
-
 
         SimpleProduct apple = new SimpleProduct("яблоко", 20);
         SimpleProduct pineapple = new SimpleProduct("ананас", 40);
@@ -34,8 +30,7 @@ public class App {
         engine.add(apple);
         engine.add(pineapple);
 
-
-       Set<Article> set1 = engine.search("яблоко");
+        Set<Article> set1 = engine.search("яблоко");
         System.out.println(set1);
         System.out.println();
         System.out.println();
@@ -48,12 +43,10 @@ public class App {
         Set<Article> set3 = engine.search("л");
         System.out.println(set3);
 
-
     }
 
     private static void basketDeleteDemo() {
         ProductBasket basket = new ProductBasket();
-
 
         Product coconut = new SimpleProduct("coconut", 150);
         Product carrot = new SimpleProduct("carrot", 10);
@@ -66,7 +59,6 @@ public class App {
         List<Product> deletedProducts = basket.deleteProductByName("carrot");
         System.out.println("Список удалённых продуктов:");
         System.out.println(deletedProducts);
-
 
         System.out.println();
         System.out.println("Содержимое корзины:");

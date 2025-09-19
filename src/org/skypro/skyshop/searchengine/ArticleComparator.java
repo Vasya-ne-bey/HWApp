@@ -14,14 +14,11 @@ public class ArticleComparator implements Comparator<Article> {
         String article1Name = article1.getArticleName();
         String article2Name = article2.getArticleName();
 
-
         if (article1Name.length() > article2Name.length()) {
             return -1;
-        }
-        else if (article1Name.length() < article2Name.length()) {
+        } else if (article1Name.length() < article2Name.length()) {
             return 1;
-        }
-        else {
+        } else {
             int compareResult = article1Name.compareTo(article2Name);
             return compareResult;
         }

@@ -25,16 +25,12 @@ public class SearchEngine {
         int mostWords = 0;
 
 
-        for (Searchable searchable : searchables) {          // [product1, product2, article2, ...]
-
+        for (Searchable searchable : searchables) {
 
             String str = searchable.getSearchTerm();
 
-
-            // считаем сколько раз повторяется слово, и если чаще чем для другого Searchable, то запоминаем этот Searchable
-
             int amount = 0;
-            int newStartIndex;          //  "ld hello jadk jask hello jalks jlas hello jklsj alkjlka dsjlkf sal"
+            int newStartIndex;
 
             int substringIndex = str.indexOf(searchableWord);
 
@@ -58,25 +54,21 @@ public class SearchEngine {
         return bestArticle;
     }
 
-
     public Set<Article> search(String searchTerm) {
 
 
         ArticleComparator searchableArticleComparator = new ArticleComparator();
 
 
-
         TreeSet<Article> articlesWithSearchTerm = searchables.stream()
-                    .filter((searchable) -> searchable instanceof Article)
-                    .filter(article -> article.getSearchTerm().contains(searchTerm))
-                    .map(searchable -> (Article)searchable)
-                    .collect(Collectors.toCollection(() -> new TreeSet<>(searchableArticleComparator)));
+                .filter((searchable) -> searchable instanceof Article)
+                .filter(article -> article.getSearchTerm().contains(searchTerm))
+                .map(searchable -> (Article) searchable)
+                .collect(Collectors.toCollection(() -> new TreeSet<>(searchableArticleComparator)));
 
         return articlesWithSearchTerm;
 
-
-   }
-
+    }
 
     public void add(Searchable searchable) {
 

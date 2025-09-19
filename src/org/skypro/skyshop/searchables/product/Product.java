@@ -11,16 +11,15 @@ public abstract class Product implements Searchable {
     public Product(String name) {
 
 
-
         if (name == null) {
             throw new IllegalArgumentException("Передано значение null");
-        }  else if (name.isBlank()) {
-            throw new IllegalArgumentException ("Передано пустое значение");
+        } else if (name.isBlank()) {
+            throw new IllegalArgumentException("Передано пустое значение");
         }
 
         this.name = name;
 
-   }
+    }
 
     public abstract int getPrice();
 

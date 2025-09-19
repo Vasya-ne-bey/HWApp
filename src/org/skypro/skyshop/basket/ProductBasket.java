@@ -7,25 +7,22 @@ import java.util.*;
 
 public class ProductBasket {
 
-
     private Map<String, List<Product>> productsMap = new HashMap<>();
-
 
     public void addProduct(Product newProduct) {
 
         String productName = newProduct.getName();     // ключ
 
-        if (! productsMap.containsKey(productName)) {
+        if (!productsMap.containsKey(productName)) {
             ArrayList<Product> productsWithThisName = new ArrayList<>();  // значение
             productsWithThisName.add(newProduct);
             productsMap.put(productName, productsWithThisName);
         } else {
-           List<Product> products = productsMap.get(productName);
+            List<Product> products = productsMap.get(productName);
             products.add(newProduct);
         }
 
     }
-
 
     public List<Product> deleteProductByName(String name) {
 
@@ -34,7 +31,6 @@ public class ProductBasket {
 
     }
 
-
     public boolean checkProduct(String wantedName) {
 
         boolean answer = productsMap.containsKey(wantedName);
@@ -42,44 +38,36 @@ public class ProductBasket {
 
     }
 
-
     public int countTotalSum() {
 
-       Collection<List<Product>> products =  productsMap.values();
+        Collection<List<Product>> products = productsMap.values();
 
-         int pricesSum = products.stream()
-                                    .flatMap(list -> list.stream())
-                                    .mapToInt(apple -> apple.getPrice())
-                                    .sum();
+        int pricesSum = products.stream()
+                .flatMap(list -> list.stream())
+                .mapToInt(apple -> apple.getPrice())
+                .sum();
 
-         return pricesSum;
+        return pricesSum;
 
     }
 
     public void printBasket() {
-        Collection<List<Product>> products =  productsMap.values();
-
+        Collection<List<Product>> products = productsMap.values();
 
         int countSpecial = products.stream()
-                                    .flatMap(list -> list.stream())
-                                    .map(apple -> {
-                                        System.out.println(apple);
-                                        return apple;
-                                    })
-                                    .filter(apple -> apple.isSpecial())
-                                    .toList()
-                                    .size();
+                .flatMap(list -> list.stream())
+                .map(apple -> {
+                    System.out.println(apple);
+                    return apple;
+                })
+                .filter(apple -> apple.isSpecial())
+                .toList()
+                .size();
 
         System.out.println("Итого: " + countTotalSum());
         System.out.println("Специальных товаров: " + countSpecial);
 
-
-
-
-
     }
-
-
 
     public void cleanBasket() {
 
