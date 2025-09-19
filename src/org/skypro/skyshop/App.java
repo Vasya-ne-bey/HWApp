@@ -1,68 +1,71 @@
 package org.skypro.skyshop;
 
-import basket.ProductBasket;
-import org.skypro.skyshop.product.Product;
-import org.skypro.skyshop.product.SimpleProduct;
+
+import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.searchables.Searchable;
+import org.skypro.skyshop.searchables.article.Article;
+import org.skypro.skyshop.searchables.product.DiscountedProduct;
+import org.skypro.skyshop.searchables.product.Product;
+import org.skypro.skyshop.searchables.product.SimpleProduct;
+import org.skypro.skyshop.searchengine.SearchEngine;
+
+import java.util.List;
+import java.util.Set;
 
 public class App {
 
     public static void main(String[] args) {
 
-        SimpleProduct apple = new SimpleProduct("Яблоко", 20);
-        SimpleProduct orange = new SimpleProduct("Апельсин", 30);
-        SimpleProduct banana = new SimpleProduct("Банан", 35);
-        SimpleProduct peach = new SimpleProduct("Персик", 30);
-        SimpleProduct lemon = new SimpleProduct("Лимон", 20);
-        SimpleProduct pear = new SimpleProduct("Груша", 25);
+        basketDeleteDemo();
 
-        ProductBasket firstBasket = new ProductBasket();
-        ProductBasket secondBasket = new ProductBasket();
-        ProductBasket thirdBasket = new ProductBasket();
+        SimpleProduct apple = new SimpleProduct("яблоко", 20);
+        SimpleProduct pineapple = new SimpleProduct("ананас", 40);
+        DiscountedProduct lemon = new DiscountedProduct("лимоны", 20, 20);
+        Article aboutApple = new Article("вкусное яблоко", "яблоко гала");
 
-        firstBasket.addProduct(apple);
-        firstBasket.addProduct(orange);
-        firstBasket.addProduct(banana);
-        firstBasket.addProduct(peach);
-        firstBasket.addProduct(pear);
+        SearchEngine engine = new SearchEngine();
 
-        System.out.println(firstBasket.countTotal());
+        engine.add(aboutApple);
+        engine.add(lemon);
+        engine.add(apple);
+        engine.add(pineapple);
 
-        firstBasket.printBasket();
+        Set<Article> set1 = engine.search("яблоко");
+        System.out.println(set1);
+        System.out.println();
+        System.out.println();
 
+        Set<Article> set2 = engine.search("ананас");
+        System.out.println(set2);
+        System.out.println();
+        System.out.println();
 
-        System.out.println(firstBasket.checkProduct(apple.getName()));
-
-
-        System.out.println(firstBasket.checkProduct(lemon.getName()));
-
-        firstBasket.addProduct(lemon);
-
-
-        secondBasket.addProduct(apple);
-        secondBasket.addProduct(apple);
-        secondBasket.addProduct(apple);
-
-        secondBasket.printBasket();
-
-        secondBasket.cleanBasket();
-
-        secondBasket.printBasket();
-
-        secondBasket.countTotal();
-
-        System.out.println(secondBasket.checkProduct(apple.getName()));
+        Set<Article> set3 = engine.search("л");
+        System.out.println(set3);
 
     }
+
+    private static void basketDeleteDemo() {
+        ProductBasket basket = new ProductBasket();
+
+        Product coconut = new SimpleProduct("coconut", 150);
+        Product carrot = new SimpleProduct("carrot", 10);
+
+        basket.addProduct(coconut);
+        basket.addProduct(carrot);
+
+        basket.printBasket();
+
+        List<Product> deletedProducts = basket.deleteProductByName("carrot");
+        System.out.println("Список удалённых продуктов:");
+        System.out.println(deletedProducts);
+
+        System.out.println();
+        System.out.println("Содержимое корзины:");
+        basket.printBasket();
+        System.out.println("Сумма");
+        System.out.println(basket.countTotalSum());
+
+    }
+
 }
-
-
-
-
-// Печать содержимого корзины с несколькими товарами.
-// Получение стоимости корзины с несколькими товарами.
-// Поиск товара, который есть в корзине.
-// Поиск товара, которого нет в корзине.
-//  Очистка корзины.
-//  Печать содержимого пустой корзины.
-// Получение стоимости пустой корзины.
-// Поиск товара по имени в пустой корзине.
